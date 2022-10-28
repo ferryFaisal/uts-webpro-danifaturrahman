@@ -12,4 +12,5 @@ if (mysqli_query($conn, $sql1)) {
     echo "Error: " . $sql1 . "<br>" . $conn->error;
 }
 
+
 mysqli_close($conn);
