@@ -66,10 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check extension
     if (in_array($imageFileType, $extensions_arr)) {
         // Upload file
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_dir . $image)) {
-            // Insert record
-            $valid_image = true;
-        }
+        move_uploaded_file($_FILES['file']['tmp_name'], $target_dir . $image);
+        // Insert record
+        $valid_image = true;
+    } else {
+        $imageErr = "Photo of product is required or invalid file photo";
+        $valid_image = false;
     }
 }
 
@@ -140,7 +142,7 @@ function test_input($data)
     </div>
     <?php
 
-    if ($valid_name && $valid_desc && $valid_price == true) {
+    if ($valid_name && $valid_desc && $valid_price && $valid_image == true) {
         include 'update_action.php';
     }
 
