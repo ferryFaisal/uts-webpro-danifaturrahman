@@ -1,17 +1,22 @@
 <?php
-// used to connect to the database
-$host = "localhost";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $db_name = "webpro";
- 
-try {
-    $con = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
-    // echo "connect successfully";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $db_name);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
- 
-// show error
-catch(PDOException $exception){
-    echo "Connection error: " . $exception->getMessage();
+
+// Create database
+$sql = "CREATE DATABASE webpro";
+if (mysqli_query($conn, $sql)) {
+    echo "Database created successfully";
+} else {
+    echo "Error creating database: " . mysqli_error($conn);
 }
-?>
+
+mysqli_close($conn);
